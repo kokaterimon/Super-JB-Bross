@@ -6,9 +6,13 @@ public class PlayerController : MonoBehaviour{
 
     public float jumpForce = 5f;
 
+    public Animator animator;
+
+    public float runningSpeed = 1.5f;
+
     private Rigidbody2D rigidbody;
 
-    private void Awake()
+    void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -16,7 +20,8 @@ public class PlayerController : MonoBehaviour{
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator.SetBool("isAlive", true);
+        animator.SetBool("isGrounded", true);
     }
 
     // Update is called once per frame
@@ -27,6 +32,16 @@ public class PlayerController : MonoBehaviour{
             //Aquí, el usuario acaba de bajar la tecla espacio
             Jump();
         }
+
+        animator.SetBool("isGrounded", IsTouchingTheGround());
+    }
+
+    void FixedUpdate()
+    {
+        if (rigidbody.velocity.x < runningSpeed)
+        {
+            rigidbody.velocity = new Vector2(runningSpeed, rigidbody.velocity.y);
+        }  
     }
 
     void Jump()
@@ -44,7 +59,10 @@ public class PlayerController : MonoBehaviour{
     {
         if (Physics2D.Raycast(this.transform.position, Vector2.down, 0.2f, groundLayer))
         {
-
+            return true;
+        }else
+        {
+            return false;
         }
     }
 }
