@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerController : MonoBehaviour{
 
     public float jumpForce = 5f;
@@ -25,9 +24,12 @@ public class PlayerController : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if (Input.GetKeyDown(KeyCode.Space)){
-            //Aquí, el usuario acaba de bajar la tecla espacio
-            Jump();
+        if (GameManager.sharedInstance.currentGameState == GameState.inGame){
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //Aquí, el usuario acaba de bajar la tecla espacio
+                Jump();
+            }
         }
 
         animator.SetBool("isGrounded", IsTouchingTheGround());
@@ -54,7 +56,6 @@ public class PlayerController : MonoBehaviour{
         }else{
             return false;
         }
-
-        GameManager.sharedInstance.GameOver();
+        
     }   
 }
