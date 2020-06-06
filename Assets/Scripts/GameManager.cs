@@ -25,53 +25,44 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
-        StartGame();
+        BackToMenu();
+    }
+
+    private void Update(){
+        
     }
 
     //Método encargado deiniciar el juego
-    public void StartGame()
-    {
+    public void StartGame(){
         SetGameState(GameState.inGame);
     }
 
     //Método que se llamará cuando el jugador muera
-    public void GameOver()
-    {
+    public void GameOver(){
         SetGameState(GameState.gamerOver);
     }
 
 
     //Método para volver al menú principal cuando el usuario lo quiera hacer
-    public void BackToMenu()
-    {
+    public void BackToMenu(){
         SetGameState(GameState.gamerOver);
     }
 
-
     //Método encargado de cambiar el estado del juego
-    void SetGameState(GameState newGameState)
-    {
-
-        if (newGameState == GameState.menu)
-        {
+    void SetGameState(GameState newGameState){
+        if (newGameState == GameState.menu){
             //Hay que preparar la escena de Unity para mostrar el menú
-
         }
-        else if (newGameState == GameState.inGame)
-        {
+        else if (newGameState == GameState.inGame){
             //Hay que preparar la escena de Unity para jugar
 
         }
-        else if (newGameState == GameState.gamerOver)
-        {
+        else if (newGameState == GameState.gamerOver){
             //Hay que preparar la escena de Unity para el Game Over
 
         }
 
-
-
         //Asignamos el estado de juego actual al que nos ha llegado por parámetro
         this.currentGameState = newGameState;
     }
-
 }

@@ -16,8 +16,7 @@ public class PlayerController : MonoBehaviour{
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         animator.SetBool("isAlive", true);
         animator.SetBool("isGrounded", true);
     }
@@ -25,7 +24,7 @@ public class PlayerController : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if (GameManager.sharedInstance.currentGameState == GameState.inGame){
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 //Aquí, el usuario acaba de bajar la tecla espacio
                 Jump();
@@ -35,10 +34,12 @@ public class PlayerController : MonoBehaviour{
         animator.SetBool("isGrounded", IsTouchingTheGround());
     }
 
-    void FixedUpdate(){
-        if (rigidbody.velocity.x < runningSpeed){
-            rigidbody.velocity = new Vector2(runningSpeed, rigidbody.velocity.y);
-        }  
+    void FixedUpdate() {
+        if (GameManager.sharedInstance.currentGameState == GameState.inGame){
+            if (rigidbody.velocity.x < runningSpeed){
+                rigidbody.velocity = new Vector2(runningSpeed, rigidbody.velocity.y);
+            }
+        }
     }
 
     void Jump(){
