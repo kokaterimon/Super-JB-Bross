@@ -29,7 +29,13 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update(){
-        
+        if (Input.GetButtonDown("Start")){
+            StartGame();
+        }
+
+        if (Input.GetButtonDown("Pause")){
+            BackToMenu();
+        }   
     }
 
     //Método encargado deiniciar el juego

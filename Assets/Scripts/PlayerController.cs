@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerController : MonoBehaviour{
 
+    public static PlayerController sharedInstance;
+
     public float jumpForce = 5f;
 
     public Animator animator;
@@ -12,6 +14,7 @@ public class PlayerController : MonoBehaviour{
     private Rigidbody2D rigidbody;
 
     void Awake(){
+        sharedInstance = this;
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -58,5 +61,10 @@ public class PlayerController : MonoBehaviour{
             return false;
         }
         
-    }   
+    }
+
+    public void Kill(){
+        GameManager.sharedInstance.GameOver();
+        this.animator.SetBool("isAlive", false);
+    }
 }
