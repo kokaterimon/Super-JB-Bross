@@ -13,15 +13,19 @@ public class PlayerController : MonoBehaviour{
 
     private Rigidbody2D rigidbody;
 
+    private Vector3 startPosition;
+
     void Awake(){
         sharedInstance = this;
         rigidbody = GetComponent<Rigidbody2D>();
+        startPosition = this.transform.position;
     }
 
     // Start is called before the first frame update
-    void Start(){
+    public void StartGame(){
         animator.SetBool("isAlive", true);
         animator.SetBool("isGrounded", true);
+        this.transform.position = startPosition;
     }
 
     // Update is called once per frame

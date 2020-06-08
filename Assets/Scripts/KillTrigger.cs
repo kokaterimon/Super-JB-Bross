@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KillTrigger : MonoBehaviour{
 
-    private void OnTriggerEnter(Collider other){
+    void OnTriggerEnter2D(Collider2D other){
         if (other.tag == "Player"){
             PlayerController.sharedInstance.Kill();
         }

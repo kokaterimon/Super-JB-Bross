@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update(){
-        if (Input.GetButtonDown("Start")){
+        if (Input.GetButtonDown("Start") && GameState.currentGameState != GameState.inGame.StartGame){
             StartGame();
         }
 
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour {
     //Método encargado deiniciar el juego
     public void StartGame(){
         SetGameState(GameState.inGame);
+        PlayerController.sharedInstance.StartGame();
     }
 
     //Método que se llamará cuando el jugador muera
@@ -48,10 +49,9 @@ public class GameManager : MonoBehaviour {
         SetGameState(GameState.gamerOver);
     }
 
-
     //Método para volver al menú principal cuando el usuario lo quiera hacer
     public void BackToMenu(){
-        SetGameState(GameState.gamerOver);
+        SetGameState(GameState.gamerOver);        
     }
 
     //Método encargado de cambiar el estado del juego
